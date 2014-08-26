@@ -1,5 +1,5 @@
 /*
- * sixad-sixaxis.cpp
+ * sixplay-sixaxis.cpp
  *
  * This file is part of the QtSixA, the Sixaxis Joystick Manager
  * Copyright 2008-10 Filipe Coelho <falktx@gmail.com>
@@ -234,14 +234,14 @@ int main(int argc, char *argv[])
     short events;
 
     if (argc < 3) {
-        std::cout << "Running " << argv[0] << " requires 'sixad'. Please run sixad instead" << std::endl;
+        std::cout << "Running " << argv[0] << " requires 'sixplay'. Please run sixplay instead" << std::endl;
         return 1;
     }
 
     const char *mac = argv[1];
     debug = atoi(argv[2]);
 
-    open_log("sixad-sixaxis");
+    open_log("sixplay-sixaxis");
     syslog(LOG_INFO, "started");
     settings = init_values(mac);
     settings.remote.enabled = false;

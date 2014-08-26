@@ -5,27 +5,27 @@ CXXFLAGS ?= -O2 -Wall
 LDFLAGS += -Wl,-Bsymbolic-functions
 CC := gcc
 
-all: sixad_bins
+all: sixplay_bins
 
 bluez_cflags := $(shell pkg-config --cflags bluez)
 bluez_libs := $(shell pkg-config --libs bluez)
 
-targets := sixad-bin sixad-sixaxis sixad-remote sixad-raw sixad-3in1 sixpair
-sixad_bins: $(targets)
+targets := sixplay-bin sixplay-sixaxis sixplay-remote sixplay-raw sixplay-3in1 sixpair
+sixplay_bins: $(targets)
 
-sixad-bin: bluetooth.o shared.o textfile.o
-sixad-bin: CFLAGS += $(bluez_cflags)
-sixad-bin: LDLIBS += $(bluez_libs)
+sixplay-bin: bluetooth.o shared.o textfile.o
+sixplay-bin: CFLAGS += $(bluez_cflags)
+sixplay-bin: LDLIBS += $(bluez_libs)
 
-sixad-sixaxis: sixaxis.o shared.o uinput.o textfile.o
-sixad-sixaxis: LDLIBS += -lpthread -lrt
+sixplay-sixaxis: sixaxis.o shared.o uinput.o textfile.o
+sixplay-sixaxis: LDLIBS += -lpthread -lrt
 
-sixad-remote: remote.o shared.o uinput.o textfile.o
-sixad-remote: LDLIBS += -lrt
+sixplay-remote: remote.o shared.o uinput.o textfile.o
+sixplay-remote: LDLIBS += -lrt
 
-sixad-raw: sixaxis.o shared.o uinput.o textfile.o
+sixplay-raw: sixaxis.o shared.o uinput.o textfile.o
 
-sixad-3in1: sixaxis.o shared.o uinput.o textfile.o
+sixplay-3in1: sixaxis.o shared.o uinput.o textfile.o
 
 sixpair: LDLIBS += -lusb
 
@@ -38,29 +38,29 @@ install: $(targets)
 	install -d $(DESTDIR)/etc/logrotate.d/
 	install -d $(DESTDIR)/usr/bin/
 	install -d $(DESTDIR)/usr/sbin/
-	install -d $(DESTDIR)/var/lib/sixad/
-	install -d $(DESTDIR)/var/lib/sixad/profiles/
-	install -m 644 sixad.default $(DESTDIR)/etc/default/sixad
-	install -m 755 sixad.init $(DESTDIR)/etc/init.d/sixad
-	install -m 644 sixad.log $(DESTDIR)/etc/logrotate.d/sixad
-	install -m 755 sixad $(DESTDIR)/usr/bin/
-	install -m 755 sixad-bin $(DESTDIR)/usr/sbin/
-	install -m 755 sixad-sixaxis $(DESTDIR)/usr/sbin/
-	install -m 755 sixad-remote $(DESTDIR)/usr/sbin/
-	install -m 755 sixad-3in1 $(DESTDIR)/usr/sbin/
-	install -m 755 sixad-raw $(DESTDIR)/usr/sbin/
-	install -m 755 sixad-dbus-blocker $(DESTDIR)/usr/sbin/
-	@chmod 777 -R $(DESTDIR)/var/lib/sixad/
+	install -d $(DESTDIR)/var/lib/sixplay/
+	install -d $(DESTDIR)/var/lib/sixplay/profiles/
+	install -m 644 sixplay.default $(DESTDIR)/etc/default/sixplay
+	install -m 755 sixplay.init $(DESTDIR)/etc/init.d/sixplay
+	install -m 644 sixplay.log $(DESTDIR)/etc/logrotate.d/sixplay
+	install -m 755 sixplay $(DESTDIR)/usr/bin/
+	install -m 755 sixplay-bin $(DESTDIR)/usr/sbin/
+	install -m 755 sixplay-sixaxis $(DESTDIR)/usr/sbin/
+	install -m 755 sixplay-remote $(DESTDIR)/usr/sbin/
+	install -m 755 sixplay-3in1 $(DESTDIR)/usr/sbin/
+	install -m 755 sixplay-raw $(DESTDIR)/usr/sbin/
+	install -m 755 sixplay-dbus-blocker $(DESTDIR)/usr/sbin/
+	@chmod 777 -R $(DESTDIR)/var/lib/sixplay/
 	@echo "Installation is Complete!"
 
 uninstall:
-	$(RM) $(DESTDIR)/etc/default/sixad
-	$(RM) $(DESTDIR)/etc/init.d/sixad
-	$(RM) $(DESTDIR)/etc/logrotate.d/sixad
-	$(RM) $(DESTDIR)/usr/bin/sixad
-	$(RM) $(DESTDIR)/usr/sbin/sixad-bin
-	$(RM) $(DESTDIR)/usr/sbin/sixad-sixaxis
-	$(RM) $(DESTDIR)/usr/sbin/sixad-remote
-	$(RM) $(DESTDIR)/usr/sbin/sixad-raw
-	$(RM) $(DESTDIR)/usr/sbin/sixad-dbus-blocker
-	$(RM) -r $(DESTDIR)/var/lib/sixad/
+	$(RM) $(DESTDIR)/etc/default/sixplay
+	$(RM) $(DESTDIR)/etc/init.d/sixplay
+	$(RM) $(DESTDIR)/etc/logrotate.d/sixplay
+	$(RM) $(DESTDIR)/usr/bin/sixplay
+	$(RM) $(DESTDIR)/usr/sbin/sixplay-bin
+	$(RM) $(DESTDIR)/usr/sbin/sixplay-sixaxis
+	$(RM) $(DESTDIR)/usr/sbin/sixplay-remote
+	$(RM) $(DESTDIR)/usr/sbin/sixplay-raw
+	$(RM) $(DESTDIR)/usr/sbin/sixplay-dbus-blocker
+	$(RM) -r $(DESTDIR)/var/lib/sixplay/

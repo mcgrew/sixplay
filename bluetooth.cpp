@@ -117,7 +117,7 @@ void do_connect(int ctl, bdaddr_t *src, bdaddr_t *dst, int debug)
             ba2str(dst, bda);
 
             char cmd[64];
-            strcpy(cmd, "/usr/sbin/sixad-remote ");
+            strcpy(cmd, "/usr/sbin/sixplay-remote ");
             strcat(cmd, bda);
             strcat(cmd, " ");
             strcat(cmd, debug ? "1" : "0");
@@ -218,7 +218,7 @@ void l2cap_accept(int ctl, int csk, int isk, int debug, int legacy)
     if (!legacy && req.vendor == 0x054c && req.product == 0x0268) {
         if (debug) syslog(LOG_INFO, "Will initiate Sixaxis now");
 
-        // New proccess for sixad-sixaxis
+        // New proccess for sixplay-sixaxis
         pid_t pid = fork();
 
         if (pid == 0) {
@@ -234,7 +234,7 @@ void l2cap_accept(int ctl, int csk, int isk, int debug, int legacy)
             char bda[18];
             ba2str(&addr_dst, bda);
 
-            const char* uinput_sixaxis_cmd = "/usr/sbin/sixad-sixaxis";
+            const char* uinput_sixaxis_cmd = "/usr/sbin/sixplay-sixaxis";
             const char* debug_mode = debug ? "1" : "0";
 
             const char* argv[] = { uinput_sixaxis_cmd, bda, debug_mode, NULL };

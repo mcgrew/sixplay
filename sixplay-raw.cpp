@@ -1,5 +1,5 @@
 /*
- * sixad-raw.cpp
+ * sixplay-raw.cpp
  *
  * This file is part of the QtSixA, the Sixaxis Joystick Manager
  * Copyright 2008-10 Filipe Coelho <falktx@gmail.com>
@@ -37,21 +37,21 @@ int main(int argc, char **argv)
     }
 
     if ((fd = open(argv[1], O_RDONLY)) < 0) {
-        std::cerr << "sixad-raw::open(hidrawX) - failed to open hidraw device" << std::endl;
+        std::cerr << "sixplay-raw::open(hidrawX) - failed to open hidraw device" << std::endl;
         return 1;
     }
 
     if ((nr=read(fd, buf, sizeof(buf))) < 0) {
-        std::cerr << "sixad-raw::read(fd) - failed to read from device" << std::endl;
+        std::cerr << "sixplay-raw::read(fd) - failed to read from device" << std::endl;
         return 1;
     }
 
     if (nr < 49 || nr > 50) {
-        std::cerr <<  "sixad-raw::read(fd) - not a sixaxis (nr = " << nr << ")" << std::endl;
+        std::cerr <<  "sixplay-raw::read(fd) - not a sixaxis (nr = " << nr << ")" << std::endl;
         return 1;
     }
 
-    open_log("sixad-raw");
+    open_log("sixplay-raw");
     settings = init_values("hidraw");
 
     // hidraw has no rumble/led support
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
         nr=read(fd, buf, sizeof(buf));
 
         if (nr < 49 || nr > 50) {
-          std::cerr <<  "sixad-raw::read(fd, buf) - failed to read from device" << std::endl;
+          std::cerr <<  "sixplay-raw::read(fd, buf) - failed to read from device" << std::endl;
           break;
         } else if (nr == 49) {
           for (i=50; i>0; i--) {
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
         uinput_close(ufd->mk, 0);
     }
 
-    std::cerr <<  "sixad-raw::read(buf) - connection has been broken" << std::endl;
+    std::cerr <<  "sixplay-raw::read(buf) - connection has been broken" << std::endl;
     
     delete ufd;
 

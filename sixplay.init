@@ -1,0 +1,60 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: sixplay
+# Required-Start:    $local_fs $syslog $remote_fs bluetooth
+# Required-Stop:     $local_fs $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start sixplay
+### END INIT INFO
+#
+# Author:       falkTX <falktx@gmail.com>
+#
+# set -e 
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DAEMON=/usr/bin/sixplay
+
+sixplay_already_running_check () {
+ps -e | grep sixplay-bin > /dev/null
+}
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+if (sixplay_already_running_check "$1"); then
+  log_warning_msg "sixplay is already running"
+else
+{
+  log_daemon_msg "Starting sixplay"
+  $DAEMON --start &>>/var/log/sixplay &
+  log_end_msg 0
+}
+fi
+    ;;
+  stop)
+    if (sixplay_already_running_check "$1"); then
+    {
+      log_daemon_msg "Stopping sixplay"
+      $DAEMON --stop || true
+      log_end_msg 0
+    }
+    else
+      log_warning_msg "sixplay is not running"
+    fi
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    status_of_proc "sixplay-bin" "sixplay" && exit 0 || exit $?
+    ;;
+  *)
+    echo "Usage: /etc/init.d/sixplay {start|stop|restart|status}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

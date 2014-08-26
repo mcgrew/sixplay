@@ -59,7 +59,7 @@ struct device_settings init_values(const char *addr)
     struct device_settings settings;
 
     char pathname[64];
-    strcpy(pathname, "/var/lib/sixad/profiles/");
+    strcpy(pathname, "/var/lib/sixplay/profiles/");
     strcat(pathname, addr);
 
     if (open(pathname, O_RDONLY) > 0) {
@@ -123,8 +123,8 @@ struct device_settings init_values(const char *addr)
 
         settings.auto_disconnect = (bool)textfile_get_int(pathname, "out_of_reach_disconnects", 0);
 
-    } else if (open("/var/lib/sixad/profiles/default", O_RDONLY) > 0) { //default config
-        strcpy(pathname, "/var/lib/sixad/profiles/default");
+    } else if (open("/var/lib/sixplay/profiles/default", O_RDONLY) > 0) { //default config
+        strcpy(pathname, "/var/lib/sixplay/profiles/default");
 
         settings.led.enabled = textfile_get_int(pathname, "enable_leds", 1);
         settings.led.auto_sel = textfile_get_int(pathname, "led_n_auto", 1);

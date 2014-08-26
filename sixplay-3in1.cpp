@@ -1,5 +1,5 @@
 /*
- * sixad-raw.cpp
+ * sixplay-raw.cpp
  *
  * This file is part of the QtSixA, the Sixaxis Joystick Manager
  * Copyright 2008-10 Filipe Coelho <falktx@gmail.com>
@@ -55,22 +55,22 @@ int main(int argc, char **argv)
     }
 
     if ((fd = open(argv[1], O_RDONLY|O_NONBLOCK)) < 0) {
-        std::cerr << "sixad-3in1::open(hidrawX) - failed to open hidraw device" << std::endl;
+        std::cerr << "sixplay-3in1::open(hidrawX) - failed to open hidraw device" << std::endl;
         return 1;
     }
 
     nr=read(fd, buf, sizeof(buf));
     if (nr < 0 && errno != EAGAIN) {
-        std::cerr << "sixad-3in1::read(fd) - failed to read from device" << std::endl;
+        std::cerr << "sixplay-3in1::read(fd) - failed to read from device" << std::endl;
         return 1;
     }
 
     if (nr != -1 && nr != 19) {
-        std::cerr <<  "sixad-3in1::read(fd) - not a 3in1 keymote (nr = " << nr << ")" << std::endl;
+        std::cerr <<  "sixplay-3in1::read(fd) - not a 3in1 keymote (nr = " << nr << ")" << std::endl;
         return 1;
     }
 
-    open_log("sixad-3in1");
+    open_log("sixplay-3in1");
 
     memset(&settings, 0, sizeof(device_settings));
 
@@ -153,7 +153,7 @@ int main(int argc, char **argv)
 
         } else {
           if (errno != EAGAIN) {
-            std::cerr <<  "sixad-3in1::read(fd, buf) - failed to read from device" << std::endl;
+            std::cerr <<  "sixplay-3in1::read(fd, buf) - failed to read from device" << std::endl;
             break;
           }
 
@@ -248,7 +248,7 @@ int main(int argc, char **argv)
 
     uinput_close(ufd->mk, 0);
 
-    std::cerr <<  "sixad-3in1::read(buf) - connection has been broken" << std::endl;
+    std::cerr <<  "sixplay-3in1::read(buf) - connection has been broken" << std::endl;
     
     delete ufd;
 

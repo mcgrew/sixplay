@@ -1,5 +1,5 @@
 /*
- * sixad-bin.cpp
+ * sixplay-bin.cpp
  *
  * This file is part of the QtSixA, the Sixaxis Joystick Manager
  * Copyright 2008-10 Filipe Coelho <falktx@gmail.com>
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
       legacy = atoi(argv[2]);
       remote = atoi(argv[3]);
     } else {
-      std::cerr << argv[0] << " requires 'sixad'. Please run sixad instead" << std::endl;
+      std::cerr << argv[0] << " requires 'sixplay'. Please run sixplay instead" << std::endl;
       return 1;
     }
 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    open_log("sixad-bin");
+    open_log("sixplay-bin");
     syslog(LOG_INFO, "started");
 
     ctl = socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HIDP);
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
         sigaction(SIGCHLD, &sa, NULL);
         sigaction(SIGPIPE, &sa, NULL);
 
-        syslog(LOG_INFO, "sixad started, press the PS button now");
+        syslog(LOG_INFO, "sixplay started, press the PS button now");
 
         hid_server(ctl, csk, isk, debug, legacy);
 
