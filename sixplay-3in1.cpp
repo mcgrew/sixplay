@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     struct device_settings settings;
 
     if (argc < 2) {
-        std::cout << "Usage: " << argv[0] << " /dev/hidrawX" << std::endl;
+        printf("Usage: %s /dev/hidrawX\n", argv[0]);
         return 1;
     }
 

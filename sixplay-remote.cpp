@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     short events;
 
     if (argc < 3) {
-        std::cout << "Running " << argv[0] << " requires 'sixplay'. Please run sixplay instead" << std::endl;
+        printf("Running %s requires 'sixplay'. Please run sixplay instead\n", argv[0]);
         return 1;
     }
 
