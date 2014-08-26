@@ -50,6 +50,7 @@ install: $(targets)
 	install -m 755 sixplay-3in1 $(DESTDIR)/usr/sbin/
 	install -m 755 sixplay-raw $(DESTDIR)/usr/sbin/
 	install -m 755 sixplay-dbus-blocker $(DESTDIR)/usr/sbin/
+	install -m 755 sixpair $(DESTDIR)/usr/sbin/
 	@chmod 777 -R $(DESTDIR)/var/lib/sixplay/
 	@echo "Installation is Complete!"
 
@@ -63,4 +64,5 @@ uninstall:
 	$(RM) $(DESTDIR)/usr/sbin/sixplay-remote
 	$(RM) $(DESTDIR)/usr/sbin/sixplay-raw
 	$(RM) $(DESTDIR)/usr/sbin/sixplay-dbus-blocker
+	$(RM) $(DESTDIR)/usr/sbin/sixpair
 	$(RM) -r $(DESTDIR)/var/lib/sixplay/
