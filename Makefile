@@ -3,14 +3,14 @@
 CXX ?= g++
 CXXFLAGS ?= -O2 -Wall
 LDFLAGS += -Wl,-Bsymbolic-functions
-CC := $(CXX)
+CC := gcc
 
 all: sixad_bins
 
 bluez_cflags := $(shell pkg-config --cflags bluez)
 bluez_libs := $(shell pkg-config --libs bluez)
 
-targets := sixad-bin sixad-sixaxis sixad-remote sixad-raw sixad-3in1
+targets := sixad-bin sixad-sixaxis sixad-remote sixad-raw sixad-3in1 sixpair
 sixad_bins: $(targets)
 
 sixad-bin: bluetooth.o shared.o textfile.o
@@ -26,6 +26,8 @@ sixad-remote: LDLIBS += -lrt
 sixad-raw: sixaxis.o shared.o uinput.o textfile.o
 
 sixad-3in1: sixaxis.o shared.o uinput.o textfile.o
+
+sixpair: LDLIBS += -lusb
 
 clean:
 	$(RM) *~ $(targets) *.o
