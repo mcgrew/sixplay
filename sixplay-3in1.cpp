@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <cstring>
-#include <iostream>
 #include <errno.h>
 #include <fcntl.h>
 #include <syslog.h>
@@ -55,18 +54,18 @@ int main(int argc, char **argv)
     }
 
     if ((fd = open(argv[1], O_RDONLY|O_NONBLOCK)) < 0) {
-        std::cerr << "sixplay-3in1::open(hidrawX) - failed to open hidraw device" << std::endl;
+        fprintf(stderr, "sixplay-3in1::open(hidrawX) - failed to open hidraw device");
         return 1;
     }
 
     nr=read(fd, buf, sizeof(buf));
     if (nr < 0 && errno != EAGAIN) {
-        std::cerr << "sixplay-3in1::read(fd) - failed to read from device" << std::endl;
+        fprintf( stderr, "sixplay-3in1::read(fd) - failed to read from device\n");
         return 1;
     }
 
     if (nr != -1 && nr != 19) {
-        std::cerr <<  "sixplay-3in1::read(fd) - not a 3in1 keymote (nr = " << nr << ")" << std::endl;
+        fprintf(stderr, "sixplay-3in1::read(fd) - not a 3in1 keymote (nr = %d)\n", nr);
         return 1;
     }
 
@@ -153,7 +152,7 @@ int main(int argc, char **argv)
 
         } else {
           if (errno != EAGAIN) {
-            std::cerr <<  "sixplay-3in1::read(fd, buf) - failed to read from device" << std::endl;
+            fprintf(stderr, "sixplay-3in1::read(fd, buf) - failed to read from device\n");
             break;
           }
 
@@ -248,7 +247,7 @@ int main(int argc, char **argv)
 
     uinput_close(ufd->mk, 0);
 
-    std::cerr <<  "sixplay-3in1::read(buf) - connection has been broken" << std::endl;
+    fprintf(stderr, "sixplay-3in1::read(buf) - connection has been broken\n");
     
     delete ufd;
 

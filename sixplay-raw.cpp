@@ -19,7 +19,7 @@
 #include "sixaxis.h"
 #include "uinput.h"
 
-#include <iostream>
+#include <stdio.h>
 #include <fcntl.h>
 #include <syslog.h>
 #include <unistd.h>
@@ -37,17 +37,17 @@ int main(int argc, char **argv)
     }
 
     if ((fd = open(argv[1], O_RDONLY)) < 0) {
-        std::cerr << "sixplay-raw::open(hidrawX) - failed to open hidraw device" << std::endl;
+        fprintf(stderr, "sixplay-raw::open(hidrawX) - failed to open hidraw device\n");
         return 1;
     }
 
     if ((nr=read(fd, buf, sizeof(buf))) < 0) {
-        std::cerr << "sixplay-raw::read(fd) - failed to read from device" << std::endl;
+        fprintf(stderr, "sixplay-raw::read(fd) - failed to read from device\n");
         return 1;
     }
 
     if (nr < 49 || nr > 50) {
-        std::cerr <<  "sixplay-raw::read(fd) - not a sixaxis (nr = " << nr << ")" << std::endl;
+        fprintf(stderr, "sixplay-raw::read(fd) - not a sixaxis (nr = %d)", nr);
         return 1;
     }
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
         nr=read(fd, buf, sizeof(buf));
 
         if (nr < 49 || nr > 50) {
-          std::cerr <<  "sixplay-raw::read(fd, buf) - failed to read from device" << std::endl;
+          fprintf(stderr, "sixplay-raw::read(fd, buf) - failed to read from device\n");
           break;
         } else if (nr == 49) {
           for (i=50; i>0; i--) {
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
         uinput_close(ufd->mk, 0);
     }
 
-    std::cerr <<  "sixplay-raw::read(buf) - connection has been broken" << std::endl;
+    fprintf(stderr, "sixplay-raw::read(buf) - connection has been broken\n");
     
     delete ufd;
 

@@ -20,7 +20,7 @@
 #include "uinput.h"
 
 #include <cstdlib>
-#include <iostream>
+#include <stdio.h>
 #include <poll.h>
 #include <signal.h>
 #include <string.h>

@@ -18,7 +18,7 @@
 #include "bluetooth.h"
 #include "shared.h"
 
-#include <iostream>
+#include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <syslog.h>
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
       legacy = atoi(argv[2]);
       remote = atoi(argv[3]);
     } else {
-      std::cerr << argv[0] << " requires 'sixplay'. Please run sixplay instead" << std::endl;
+      fprintf(stderr, "%s requires 'sixplay'. Please run sixplay instead\n", argv[0]);
       return 1;
     }
 
