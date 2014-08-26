@@ -18,7 +18,7 @@
 #include "uinput.h"
 #include "shared.h"
 
-#include <cstdio>
+#include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
 #include <syslog.h>

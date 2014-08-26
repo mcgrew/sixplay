@@ -19,8 +19,8 @@
 #include "sixaxis.h"
 #include "uinput.h"
 
-#include <cstdlib>
 #include <iostream>
+#include <stdlib.h>
 #include <stdio.h>
 #include <poll.h>
 #include <signal.h>
