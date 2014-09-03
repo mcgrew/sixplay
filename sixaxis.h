@@ -18,6 +18,8 @@
 #ifndef SIXAXIS_H
 #define SIXAXIS_H
 
+#include "shared.h"
+
 #define INPUT_TYPE_KEYS  2
 #define INPUT_TYPE_MOUSE 3
 

@@ -18,6 +18,10 @@
 #ifndef SHARED_H
 #define SHARED_H
 
+#define bool int
+#define true 1
+#define false 0
+
 struct dev_led {
     bool enabled;
     bool anim;

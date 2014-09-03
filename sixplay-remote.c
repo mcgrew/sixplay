@@ -38,7 +38,7 @@ volatile bool active = false;
 
 static int get_time()
 {
-  timespec tp;
+  struct timespec tp;
   if (!clock_gettime(CLOCK_MONOTONIC, &tp)) {
     return tp.tv_sec/60;
   } else {

@@ -19,7 +19,6 @@
 #include "sixaxis.h"
 #include "uinput.h"
 
-#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <poll.h>
@@ -163,7 +162,7 @@ static void rumble_listen()
 
 static int get_time()
 {
-  timespec tp;
+  struct timespec tp;
   if (!clock_gettime(CLOCK_MONOTONIC, &tp)) {
     return tp.tv_sec/60;
   } else {

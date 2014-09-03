@@ -18,8 +18,8 @@
 #include "bluetooth.h"
 #include "shared.h"
 
-#include <cstdlib>
-#include <cerrno>
+#include <stdlib.h>
+#include <errno.h>
 #include <stdio.h>
 #include <poll.h>
 #include <signal.h>

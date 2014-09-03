@@ -18,6 +18,8 @@
 #ifndef REMOTE_H
 #define REMOTE_H
 
+#include "shared.h"
+
 #define REMOTE_KEY_1           0x00
 #define REMOTE_KEY_2           0x01
 #define REMOTE_KEY_3           0x02

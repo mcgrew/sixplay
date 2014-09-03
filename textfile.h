@@ -18,7 +18,7 @@
 #ifndef TEXTFILE_H
 #define TEXTFILE_H
 
-#include <cstdlib>
+#include <stdlib.h>
 
 inline char *find_key(char *map, size_t size, const char *key, size_t len, int icase);
 char *read_key(const char *pathname, const char *key, int icase);

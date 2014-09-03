@@ -17,7 +17,7 @@
 
 #include "textfile.h"
 
-#include <cerrno>
+#include <errno.h>
 #include <ctype.h>
 #include <fcntl.h>
 #include <string.h>

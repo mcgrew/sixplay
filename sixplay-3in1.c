@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 
     open_log("sixplay-3in1");
 
-    memset(&settings, 0, sizeof(device_settings));
+    memset(&settings, 0, sizeof(struct device_settings));
 
     settings.led.enabled = 0;
     settings.joystick.enabled = 0;

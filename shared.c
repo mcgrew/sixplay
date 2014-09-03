@@ -18,8 +18,8 @@
 #include "shared.h"
 #include "textfile.h"
 
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <syslog.h>
@@ -44,7 +44,7 @@ bool io_canceled()
   return __io_canceled;
 }
 
-void sig_term(int /* sig */)
+void sig_term(int sig)
 {
     __io_canceled = 1;
 }

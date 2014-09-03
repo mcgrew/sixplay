@@ -19,6 +19,7 @@
 #define BLUETOOTH_H
 
 #include <bluetooth/bluetooth.h>
+#include <bluetooth/hidp.h>
 #include <bluetooth/l2cap.h>
 
 #define L2CAP_PSM_HIDP_CTRL 0x11
