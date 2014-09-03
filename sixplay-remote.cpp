@@ -36,8 +36,6 @@ int timeout = 30;
 
 volatile bool active = false;
 
-struct uinput_fd *ufd;
-
 static int get_time()
 {
   timespec tp;
@@ -48,7 +46,7 @@ static int get_time()
   }
 }
 
-static void process_remote(struct device_settings settings, const char *mac, int modes)
+static void process_remote(struct device_settings settings, const char *mac, int modes, struct uinput_fd *ufd)
 {
     int br;
     bool msg = true;
@@ -92,6 +90,7 @@ static void process_remote(struct device_settings settings, const char *mac, int
 int main(int argc, char *argv[])
 {
     struct pollfd p[3];
+    struct uinput_fd *ufd;
     struct timespec timeout;
     struct device_settings settings;
     struct sigaction sa;
@@ -172,7 +171,7 @@ int main(int argc, char *argv[])
             continue;
 
         if (p[1].revents & POLLIN) {
-            process_remote(settings, mac, modes);
+            process_remote(settings, mac, modes, ufd);
         }
 
         events = p[0].revents | p[1].revents | p[2].revents;
@@ -190,9 +189,9 @@ int main(int argc, char *argv[])
     if (settings.remote.enabled || settings.input.enabled) {
         uinput_close(ufd->mk, debug);
     }
-    
-    delete ufd;
 
+    free(ufd);
+    
     shutdown(isk, SHUT_RDWR);
     shutdown(csk, SHUT_RDWR);
 

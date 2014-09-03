@@ -20,6 +20,7 @@
 #include "uinput.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <syslog.h>
 #include <unistd.h>
@@ -101,7 +102,7 @@ int main(int argc, char **argv)
 
     fprintf(stderr, "sixplay-raw::read(buf) - connection has been broken\n");
     
-    delete ufd;
+    free(ufd);
 
     return 0;
 }

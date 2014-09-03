@@ -354,7 +354,7 @@ int main(int argc, char *argv[])
         uinput_close(ufd->mk, debug);
     }
 
-    delete ufd;
+    free(ufd);
     
     do_rumble(csk, 10, 0xff, 0xff, 0x01);
 

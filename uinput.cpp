@@ -19,6 +19,7 @@
 #include "shared.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
 #include <syslog.h>
@@ -27,7 +28,7 @@
 struct uinput_fd *uinput_open(int DEV_TYPE, const char *mac, struct device_settings settings)
 {
     const char *uinput_filename[] = { "/dev/uinput", "/dev/input/uinput", "/dev/misc/uinput" };
-    uinput_fd *ufd = new uinput_fd;
+    struct uinput_fd *ufd = (struct uinput_fd*)calloc(sizeof (struct uinput_fd), 1);
     int i;
 
     if (settings.joystick.enabled) {
