@@ -32,6 +32,14 @@
 #include <bluetooth/sdp_lib.h>
 #include <bluetooth/hci_lib.h>
 
+#ifndef REMOTE_CMD
+#define REMOTE_CMD "/usr/bin/sixplay-remote"
+#endif
+
+#ifndef SIXAXIS_CMD
+#define SIXAXIS_CMD "/usr/bin/sixplay-sixaxis"
+#endif
+
 void do_search(int ctl, bdaddr_t *bdaddr, int debug)
 {
         inquiry_info *info = NULL;
@@ -117,7 +125,7 @@ void do_connect(int ctl, bdaddr_t *src, bdaddr_t *dst, int debug)
             ba2str(dst, bda);
 
             char cmd[64];
-            strcpy(cmd, "/usr/sbin/sixplay-remote ");
+            strcpy(cmd, REMOTE_CMD);
             strcat(cmd, bda);
             strcat(cmd, " ");
             strcat(cmd, debug ? "1" : "0");
@@ -234,7 +242,7 @@ void l2cap_accept(int ctl, int csk, int isk, int debug, int legacy)
             char bda[18];
             ba2str(&addr_dst, bda);
 
-            const char* uinput_sixaxis_cmd = "/usr/sbin/sixplay-sixaxis";
+            const char* uinput_sixaxis_cmd = SIXAXIS_CMD;
             const char* debug_mode = debug ? "1" : "0";
 
             const char* argv[] = { uinput_sixaxis_cmd, bda, debug_mode, NULL };
@@ -502,6 +510,7 @@ int get_sdp_device_info(const bdaddr_t *src, const bdaddr_t *dst, struct hidp_co
 
     pdlist = sdp_data_get(rec, 0x0206);
     if (pdlist) {
+            // WTF?
             pdlist = pdlist->val.dataseq;
             pdlist = pdlist->val.dataseq;
             pdlist = pdlist->next;

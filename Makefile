@@ -66,3 +66,6 @@ uninstall:
 	$(RM) $(DESTDIR)/usr/sbin/sixplay-dbus-blocker
 	$(RM) $(DESTDIR)/usr/sbin/sixpair
 	$(RM) -r $(DESTDIR)/var/lib/sixplay/
+
+test: CFLAGS += '-DSIXAXIS_CMD="./sixplay-sixaxis"' '-DREMOTE_CMD="./sixplay-remote"'
+test: $(targets)
