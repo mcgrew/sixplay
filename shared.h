@@ -29,18 +29,29 @@ struct dev_led {
     int number;
 };
 
+/** Represents a dualshock device settings */
 struct dev_joystick {
+    /** Whether the device is enabled */
     bool enabled;
+    /** Whether buttons are enabled */
     bool buttons;
+    /** Whether the axis position detection is enabled */
     bool axis;
+    /** Whether the S buttons (?) are enables */
     bool sbuttons;
+    /** Whether acceleration detection is enabled */
     bool accel;
+    /** Whether accon (?) detection is enabled */
     bool accon;
+    /** Whether speed detection is enabled */
     bool speed;
+    /** Whether position detection is enabled */
     bool pos;
 };
 
+/** Represents settings for a PS3 remote */
 struct dev_remote {
+    /** Whether the remote is enabled */
     bool enabled;
     bool numeric;
     bool dvd;
@@ -48,26 +59,79 @@ struct dev_remote {
     bool multimedia;
 };
 
+/** Represents input device settings */
 struct dev_input {
     bool enabled;
-    int key_select, key_l3, key_r3, key_start, key_up, key_right, key_down, key_left;
-    int key_l2, key_r2, key_l1, key_r1, key_tri, key_cir, key_squ, key_cro, key_ps;
-    int axis_l_type, axis_r_type, axis_speed;
-    int axis_l_up, axis_l_right, axis_l_down, axis_l_left;
-    int axis_r_up, axis_r_right, axis_r_down, axis_r_left;
+    /** The current state of the select button */
+    int key_select, 
+    /** The current state of the L3 button (left stick press) */
+        key_l3, 
+    /** The current state of the R3 button (right stick press) */
+        key_r3, 
+    /** The current state of the start button */
+        key_start, 
+    /** The current state of the up d-pad button */
+        key_up, 
+    /** The current state of the right d-pad button */
+        key_right, 
+    /** The current state of the down d-pad button */
+        key_down, 
+    /** The current state of the left d-pad button */
+        key_left,
+    /** The current state of the L2 button (left trigger) */
+        key_l2, 
+    /** The current state of the R2 button (right trigger) */
+        key_r2, 
+    /** The current state of the L1 button (left shoulder) */
+        key_l1, 
+    /** The current state of the R1 button (right shoulder) */
+        key_r1, 
+    /** The current state of the triangle button */
+        key_tri, 
+    /** The current state of the circle button */
+        key_cir, 
+    /** The current state of the square button */
+        key_squ, 
+    /** The current state of the cross button (X) */
+        key_cro, 
+    /** The current state of the PS button (HOME) */
+        key_ps;
+    int axis_l_type, 
+        axis_r_type, 
+        axis_speed,
+    /** The upward position of the left stick */
+        axis_l_up,
+    /** The rightward position of the left stick */
+        axis_l_right, 
+    /** The downward position of the left stick */
+        axis_l_down,
+    /** The leftward position of the left stick */
+        axis_l_left,
+    /** The upward position of the left stick */
+        axis_r_up, 
+    /** The rightward position of the right stick */
+        axis_r_right, 
+    /** The downward position of the right stick */
+        axis_r_down, 
+    /** The leftward position of the right stick */
+        axis_r_left;
+    /** Whether or not to use the L3 and R3 controls */
     bool use_lr3;
 };
 
+/** Represents rumble settings for dualshock */
 struct dev_rumble {
     bool enabled;
     bool old_mode;
 };
 
+/** Represents device timeout settings */
 struct dev_timeout {
     bool enabled;
     int timeout;
 };
 
+/** Represents settings for any connected device */
 struct device_settings {
     bool auto_disconnect;
     struct dev_led led;

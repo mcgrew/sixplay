@@ -31,8 +31,11 @@
 
 #define AXIS_PADDING 10
 
+/** Repesents a device connection descriptor */
 struct uinput_fd {
+    /** Represents the joystick number */
     int js;
+    /** Represents (?) */
     int mk;
 };
 
